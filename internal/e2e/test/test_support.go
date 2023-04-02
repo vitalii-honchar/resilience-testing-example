@@ -178,11 +178,6 @@ func (s *Stage) After5Seconds() *Stage {
 	return s
 }
 
-func (s *Stage) After10Seconds() *Stage {
-	time.Sleep(10 * time.Second)
-	return s
-}
-
 func (s *Stage) TheNatsMessageWasPublished() {
 	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
 	defer cancel()
