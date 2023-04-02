@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"sync"
 	"time"
 
 	"github.com/nats-io/nats.go"
@@ -51,12 +52,18 @@ func NewService(cfg *Config) (*Service, error) {
 }
 
 func (s *Service) Start() {
+	var wg sync.WaitGroup
+	wg.Add(1)
+
 	go func() {
+		wg.Done()
 		err := s.server.ListenAndServe()
 		if err != nil && err != http.ErrServerClosed {
 			log.Printf("http server error: %v\n", err)
 		}
 	}()
+
+	wg.Wait()
 
 	log.Printf("service started")
 }

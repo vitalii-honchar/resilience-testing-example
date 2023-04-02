@@ -7,13 +7,10 @@ import (
 )
 
 func TestPublishTelemetry(t *testing.T) {
-	// GIVEN
 	stage := test.NewStage(t)
 
-	// WHEN
 	stage.SendTelemetryRequest()
 
-	// THEN
 	stage.TheResponseIsSuccessful().
 		TheNatsMessageWasPublished()
 }

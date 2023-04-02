@@ -115,7 +115,7 @@ func (s *Stage) SendTelemetryRequest() *Stage {
 		s.t.Fatal(err)
 	}
 
-	resp, err := http.Post(fmt.Sprintf("http://localhost:%d/telemetry", s.cfg.Port), "application/json", bytes.NewBuffer(req))
+	resp, err := http.Post(fmt.Sprintf("http://127.0.0.1:%d/telemetry", s.cfg.Port), "application/json", bytes.NewBuffer(req))
 
 	s.httpActual = &httpActual{err: err}
 
